@@ -31,6 +31,7 @@ function fetchBreeds() {
     .then((resp) => resp.json())
     .then((data) => {
       breeds = Object.keys(data.message);
+      console.log(breeds);
       breeds.forEach((breed) => addBreed(breed));
     });
 }
@@ -43,7 +44,14 @@ function addBreed(breed) {
 }
 
 // Challenge 3
-// change font when a list item is clicked, make function and add to addBreed?
+window.addEventListener("click", function (event) {
+  const target = event.target; //li
+  if (target.tagName !== "LI") {
+    return; // not li stop the functin
+  }
+  const color = target.style.color;
+  target.style.color = color ? "" : "red"; // color is set then clear it, otherwise set to 'red'
+});
 
 // Challenge 4
 // filter breeds by first letter, how will i display this? do i need to remove previous li's and create new ones?
