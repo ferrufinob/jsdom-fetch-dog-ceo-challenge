@@ -1,7 +1,10 @@
 let breeds = [];
+
 document.addEventListener("DOMContentLoaded", () => {
   fetchImages();
   fetchBreeds();
+
+  // dropDown();
 });
 
 // Challenge 1
@@ -31,14 +34,15 @@ function fetchBreeds() {
     .then((resp) => resp.json())
     .then((data) => {
       breeds = Object.keys(data.message);
-      console.log(breeds);
       breeds.forEach((breed) => addBreed(breed));
+      getSelectedValue();
     });
 }
 
 function addBreed(breed) {
   let breedUL = document.querySelector("#dog-breeds");
   let liElement = document.createElement("li");
+  liElement.id = "list";
   liElement.innerText = breed;
   breedUL.appendChild(liElement);
 }
@@ -54,5 +58,31 @@ window.addEventListener("click", function (event) {
 });
 
 // Challenge 4
-// filter breeds by first letter, how will i display this? do i need to remove previous li's and create new ones?
-// breadth-first search???
+
+//display the list
+//remove previous list and show a list matching dropdown selection
+
+// get the value of the dropdown letter that was selected and call on filter function to pass in the value of selected letter
+function getSelectedValue() {
+  const selectValue = document.querySelector("#breed-dropdown");
+  selectValue.addEventListener("change", function (e) {
+    filter(e.target.value);
+    console.log(filter(e.target.value));
+  });
+}
+// solution using filter with startsWith
+function filter(letter) {
+  const filtered = breeds.filter((breed) => breed.startsWith(letter));
+  return filtered;
+}
+
+//################################################################//
+// solution using indexOf
+// function filter(letter) {
+//   let results = [];
+//   let len = breeds.length;
+//   for (let i = 0; i < len; i++) {
+//     if (breeds[i].indexOf(letter) == 0) results.push(breeds[i]); //if the letter at index 0 matches that breed then its a match
+//   }
+//   return results;
+// }
