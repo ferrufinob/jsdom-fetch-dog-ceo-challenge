@@ -61,14 +61,15 @@ function getSelectedValue() {
   selectValue.addEventListener("change", function () {
     const ul = document.querySelector("#dog-breeds");
     ul.innerText = "";
-    let data = filtering(`${this.value}`);
-    return data;
+    console.log(this.value);
+    filtering(this.value);
   });
 }
 
 function filtering(letter) {
   // create a new array from breeds that returns only the breeds that start with that given letter
   const filtered = breeds.filter((breed) => breed.startsWith(letter));
+  console.log(filtered);
   return filtered.forEach((filter) => addBreed(filter));
 }
 
