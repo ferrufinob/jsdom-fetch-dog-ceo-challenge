@@ -30,7 +30,9 @@ function fetchBreeds() {
   fetch(breedUrl)
     .then((resp) => resp.json())
     .then((data) => {
+      // Object.keys() creates an iterable object(an array) from the Object
       breeds = Object.keys(data.message);
+      //iterate the now iterable object and add to list
       breeds.forEach((breed) => addBreed(breed));
     });
 }
@@ -59,12 +61,13 @@ function getSelectedValue() {
   selectValue.addEventListener("change", function () {
     const ul = document.querySelector("#dog-breeds");
     ul.innerText = "";
-    let data = filter(`${this.value}`);
+    let data = filtering(`${this.value}`);
     return data;
   });
 }
 
-function filter(letter) {
+function filtering(letter) {
+  // create a new array from breeds that returns only the breeds that start with that given letter
   const filtered = breeds.filter((breed) => breed.startsWith(letter));
   return filtered.forEach((filter) => addBreed(filter));
 }
