@@ -3,6 +3,7 @@ let breeds = [];
 document.addEventListener("DOMContentLoaded", () => {
   fetchImages();
   fetchBreeds();
+  getSelectedValue();
 
   // dropDown();
 });
@@ -35,7 +36,6 @@ function fetchBreeds() {
     .then((data) => {
       breeds = Object.keys(data.message);
       breeds.forEach((breed) => addBreed(breed));
-      getSelectedValue();
     });
 }
 
@@ -59,21 +59,21 @@ window.addEventListener("click", function (event) {
 
 // Challenge 4
 
-//display the list
-//remove previous list and show a list matching dropdown selection
-
-// get the value of the dropdown letter that was selected and call on filter function to pass in the value of selected letter
 function getSelectedValue() {
   const selectValue = document.querySelector("#breed-dropdown");
-  selectValue.addEventListener("change", function (e) {
-    filter(e.target.value);
-    console.log(filter(e.target.value));
+  selectValue.addEventListener("change", function () {
+    const ul = document.querySelector("#dog-breeds");
+    // clear previous list first
+    ul.innerText = "";
+    // what im displaying after its cleared
+    let data = filter(`${this.value}`);
+    return data;
   });
 }
 // solution using filter with startsWith
 function filter(letter) {
   const filtered = breeds.filter((breed) => breed.startsWith(letter));
-  return filtered;
+  return filtered.forEach((filter) => addBreed(filter));
 }
 
 //################################################################//
