@@ -84,10 +84,14 @@ document.addEventListener("DOMContentLoaded", () => {
   // Event Listeners
 
   // Challenge 3
-  document.querySelector("ul").addEventListener("click", (e) => {
-    const color = e.target.style.color;
-    e.target.style.color = color ? "" : "red";
-  });
+  const liColorChanger = document
+    .querySelector("ul")
+    .addEventListener("click", (e) => {
+      const color = e.target.style.color;
+      e.target.style.color = color ? "" : "red";
+    });
+
+  liColorChanger;
 
   // Challenge 4
   function getSelectedValue() {
