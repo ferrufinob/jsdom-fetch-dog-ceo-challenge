@@ -1,9 +1,33 @@
 let breeds = [];
+let alpha = [
+  "e",
+  "f",
+  "g",
+  "h",
+  "i",
+  "j",
+  "k",
+  "l",
+  "m",
+  "n",
+  "o",
+  "p",
+  "q",
+  "r",
+  "s",
+  "t",
+  "u",
+  "v",
+  "w",
+  "x",
+  "y",
+  "z",
+];
 
 document.addEventListener("DOMContentLoaded", () => {
   fetchImages();
+  addAlpha();
   fetchBreeds();
-
   getSelectedValue();
 
   // Challenge 1
@@ -42,6 +66,23 @@ document.addEventListener("DOMContentLoaded", () => {
     breedUL.insertAdjacentHTML("beforeend", `<li class="list">${breed}</li>`);
   }
 
+  function filtering(letter) {
+    // create a new array from breeds that returns only the breeds that start with that given letter
+    const filtered = breeds.filter((breed) => breed.startsWith(letter));
+    console.log(filtered);
+    return filtered.forEach((filter) => addBreed(filter));
+  }
+
+  //Bonus
+  function addAlpha() {
+    const selectValue = document.querySelector("#breed-dropdown");
+    alpha.forEach((alph) => {
+      selectValue.insertAdjacentHTML("beforeend", `<option>${alph}</option>`);
+    });
+  }
+
+  // Event Listeners
+
   // Challenge 3
   document.querySelector("ul").addEventListener("click", (e) => {
     const color = e.target.style.color;
@@ -55,12 +96,5 @@ document.addEventListener("DOMContentLoaded", () => {
       document.querySelectorAll(".list").forEach((li) => li.remove());
       filtering(e.target.value);
     });
-  }
-
-  function filtering(letter) {
-    // create a new array from breeds that returns only the breeds that start with that given letter
-    const filtered = breeds.filter((breed) => breed.startsWith(letter));
-    console.log(filtered);
-    return filtered.forEach((filter) => addBreed(filter));
   }
 });
