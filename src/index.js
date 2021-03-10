@@ -68,9 +68,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function filtering(letter) {
     // create a new array from breeds that returns only the breeds that start with that given letter
-    const filtered = breeds.filter((breed) => breed.startsWith(letter));
-    console.log(filtered);
-    return filtered.forEach((filter) => addBreed(filter));
+    const filtered = breeds
+      .filter((breed) => breed.startsWith(letter))
+      .forEach((filter) => addBreed(filter));
   }
 
   //Bonus
@@ -84,11 +84,14 @@ document.addEventListener("DOMContentLoaded", () => {
   // Event Listeners
 
   // Challenge 3
+  //using event delegation, find the smallest stable parent to gain access to all <li> elements
   const liColorChanger = document
     .querySelector("ul")
     .addEventListener("click", (e) => {
-      const color = e.target.style.color;
-      e.target.style.color = color ? "" : "red";
+      if (e.target.tagName === "LI") {
+        const color = e.target.style.color;
+        e.target.style.color = color ? "" : "red";
+      }
     });
 
   liColorChanger;
